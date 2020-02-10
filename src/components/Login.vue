@@ -1,5 +1,7 @@
 <template>
+
   <div class="login">
+    <my-portrait></my-portrait>
       <div>
         <h1>园长的登录入口</h1>
         <el-input placeholder="请输入用户名" v-model="name" clearable class="input_style"></el-input>
@@ -16,6 +18,7 @@
 
 <script>
    import Axios from 'axios';
+   import portrait from '@/components/portrait';
 
    export default {
       name: "Login",
@@ -25,6 +28,11 @@
           password : '',
         }
       },
+
+      components:{
+        'my-portrait':portrait
+      },
+
       methods:{
 
         getData(){

@@ -4,13 +4,14 @@ import HelloWorld from '@/components/HelloWorld'
 import HelloWorld2 from '@/components/HelloWorld2'
 import Login from '@/components/Login'
 import Main from '@/components/Main'
+import portrait from '@/components/portrait'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/hello',
       name: 'HelloWorld',
       component: HelloWorld
     },
@@ -20,7 +21,7 @@ export default new Router({
 		  component: HelloWorld2
 		},
     {
-      path: '/Login',
+      path: '/',
       name: 'Login',
       component: Login
     },
@@ -28,6 +29,16 @@ export default new Router({
       path: '/Main',
       name: 'Main',
       component: Main
+    },
+    {
+      path: '/Touxiang',
+      name: 'Touxiang',
+      component: resolve => require(['../pages/touxiang.vue'], resolve),
+    },
+    {
+      path: '/portrait',
+      name: 'portrait',
+      component: portrait
     }
   ]
 })

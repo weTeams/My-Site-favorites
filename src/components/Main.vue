@@ -67,6 +67,19 @@
          <el-button type="primary" @click=" addNew()">确 定</el-button>
        </div>
      </el-dialog>
+
+     <el-dialog
+       title="温馨提醒"
+       :visible.sync="dialogVisible"
+       width="30%"
+       :before-close="handleClose">
+       <span>你是否确认进行删除操作？</span>
+       <span slot="footer" class="dialog-footer">
+         <el-button @click="dialogVisible = false">取 消</el-button>
+         <el-button type="primary" @click="handleDelete(temp_index,temp_site)">确 定</el-button>
+       </span>
+     </el-dialog>
+
      <el-header style="text-align: right; font-size: 12px">
        <el-dropdown>
          <i class="el-icon-setting" style="margin-right: 15px"></i>
@@ -86,7 +99,7 @@
      </el-header>
 
      <el-main>
-       <el-table :data="tables"  stripe=true >
+       <el-table :data="tables.slice((currentPage-1)*pagesize,currentPage*pagesize)"  stripe=true >
          <el-table-column prop="date" label="日期" width="140">
 
          </el-table-column>
@@ -109,10 +122,23 @@
                  <el-button
                    size="mini"
                    type="danger"
-                   @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                   @click="handleDelete_first(scope.$index, scope.row)">删除</el-button>
                </template>
              </el-table-column>
+
        </el-table>
+       <div class="pagination">
+            <el-pagination
+               @size-change="handleSizeChange"
+               @current-change="handleCurrentChange"
+               :current-page="currentPage"
+               :page-sizes="[5, 10, 15, 20]"
+               :page-size="pagesize"
+                layout="total, sizes, prev, pager, next, jumper"
+               :total="tables.length">
+             </el-pagination>
+     </div>
+
      </el-main>
    </el-container>
  </el-container>
@@ -133,12 +159,21 @@
           username: this.$route.params.username,
           urlData:'',
           dialogFormVisible: false,
+          dialogVisible: false,
+
+          temp_index:'',
+          temp_site:'',
+
           form: {
                     url: '',
                     delivery: false,
                   },
           formLabelWidth: '80px',
-          search: ''
+          search: '',
+
+                currentPage:1, //初始页
+                pagesize:10,    //    每页的数据
+
         }
 
       },
@@ -183,6 +218,10 @@
         }).then((response) =>{          //这里使用了ES6的语法
             console.log(response);       //请求成功返回的数据
             this.getAll();
+            this.$message({
+              message: '添加成功',
+              type: 'success'
+            });
         }).catch((error) =>{
             console.log(error);       //请求失败返回的数据
         })
@@ -198,7 +237,15 @@
 
       },//getAll
 
+      handleDelete_first(index,site){
+        this.dialogVisible=true;
+        this.temp_index=index;
+        this.temp_site=site;
+      },
+
       handleDelete(index,site){
+
+        this.dialogVisible=false;
         console.log(site);
         console.log(site._id);
         this.instance.deleteUrl({    //这里是发送给后台的数据
@@ -206,11 +253,25 @@
         }).then((response) =>{          //这里使用了ES6的语法
             console.log(response);       //请求成功返回的数据
             this.getAll();
+                    this.$message({
+                      message: '删除成功',
+                      type: 'success'
+                    });
         }).catch((error) =>{
             console.log(error);       //请求失败返回的数据
         })
 
-      }//deleteURL
+      },//deleteURL
+
+        // 初始页currentPage、初始每页数据数pagesize和数据data
+        handleSizeChange: function (size) {
+                this.pagesize = size;
+                console.log(this.pagesize)  //每页下拉显示数据
+        },
+        handleCurrentChange: function(currentPage){
+                this.currentPage = currentPage;
+                console.log(this.currentPage)  //点击第几页
+        },
 
       },
       mounted() {

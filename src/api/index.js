@@ -15,12 +15,17 @@ export default {
   getallURL () {
     return instance.get('/api2/sites/getallURL');
   },
+  getHead (data) {
+    return instance.get('/api2/users/download',data);
+  },
   addNewUrl ( data ) {
     return instance.post('/api2/sites/addNewUrl', data);
   },
   deleteUrl ( data ) {
     return instance.post('/api2/sites/deleteURL', data);
   },
+
+
   allUser () {
     return instance.post('/api2/users');
   },
