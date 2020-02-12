@@ -3,7 +3,7 @@
   <div class="login">
     <my-portrait></my-portrait>
       <div>
-        <h1>园长的登录入口</h1>
+        <h1>{{this.$store.state.username}}的等级：LV.{{this.$store.state.level}}</h1>
         <el-input placeholder="请输入用户名" v-model="name" clearable class="input_style"></el-input>
       </div>
       <div>
@@ -19,6 +19,7 @@
 <script>
    import Axios from 'axios';
    import portrait from '@/components/portrait';
+   import store from '../vuex/store.js';
 
    export default {
       name: "Login",
@@ -28,10 +29,12 @@
           password : '',
         }
       },
-
+      store,
       components:{
         'my-portrait':portrait
       },
+
+
 
       methods:{
 
@@ -59,7 +62,19 @@
         }//login2
 
 
-      }//method
+      },//method
+
+      created(){
+      if (localStorage.getItem("userMsg")) {
+        this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(localStorage.getItem("userMsg"))))
+      }
+
+      //在页面刷新时将vuex里的信息保存到localStorage里
+      window.addEventListener("beforeunload",()=>{
+           localStorage.setItem("userMsg",JSON.stringify(this.$store.state))
+        })
+
+      }
     }
 
 </script>

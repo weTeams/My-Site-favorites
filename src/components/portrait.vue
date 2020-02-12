@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-basic--circle">头像框
+  <div class="demo-basic--circle">头像框:[{{this.$store.state.username}}]
     <div class="block"><el-avatar :size="50" :src="circleUrl+'/'+picture"></el-avatar></div>
   </div>
 </template>

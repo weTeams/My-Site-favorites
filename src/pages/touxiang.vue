@@ -20,7 +20,7 @@
       },
       methods: {
         handleAvatarSuccess(res, file) {
-          console.log("开心哦，成功了");
+          
           this.imageUrl = URL.createObjectURL(file.raw);
 
         },

@@ -9,6 +9,10 @@ const instance = axios.create({
 });
 
 export default {
+  getFeiyanData (){
+    return instance.get('Feiyanapi/api?version=epidemic&appid=28936334&appsecret=jQmv77wE');
+  },
+
   userLogin ( data ) {
     return instance.post('/api2/users/login', data);
   },

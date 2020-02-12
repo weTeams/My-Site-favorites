@@ -1,8 +1,8 @@
 <template>
  <div class="main">
-         <div class="demo-basic--circle">
-           <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
-         </div>
+   <my-headnav></my-headnav>
+   <my-portrait></my-portrait>
+
             <h1>欢迎回家，罗杰大人{{username}}</h1>
  <el-container style="height: 500px; border: 1px solid #eee">
    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
@@ -149,8 +149,15 @@
 <script>
 
     import Axios from 'axios';
+    import portrait from '@/components/portrait';
+    import HeadNav from '@/components/HeadNav';
 
     export default {
+      components:{
+        'my-portrait':portrait,
+        'my-headnav':HeadNav
+      },
+
 
       data () {
 
@@ -178,7 +185,6 @@
 
       },
       computed: {
-
               // 模糊搜索
               tables () {
                 const search = this.search
