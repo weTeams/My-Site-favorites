@@ -1,9 +1,7 @@
 <template>
  <div class="main">
    <my-headnav></my-headnav>
-   <my-portrait></my-portrait>
 
-            <h1>欢迎回家，罗杰大人{{username}}</h1>
  <el-container style="height: 500px; border: 1px solid #eee">
    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
      <el-menu :default-openeds="['1', '3']">
@@ -38,7 +36,7 @@
          </el-submenu>
        </el-submenu>
        <el-submenu index="3">
-         <template slot="title"><i class="el-icon-setting"></i>导航三</template>
+         <template slot="title"><i class="el-icon-setting"></i>工具</template>
          <el-menu-item-group>
            <template slot="title">分组一</template>
            <el-menu-item index="3-1">选项1</el-menu-item>
@@ -137,7 +135,7 @@
                 layout="total, sizes, prev, pager, next, jumper"
                :total="tables.length">
              </el-pagination>
-     </div>
+       </div>
 
      </el-main>
    </el-container>
@@ -145,9 +143,9 @@
 
  </div>
 </template>
-
 <script>
 
+    import '@/outjs/heart.js'
     import Axios from 'axios';
     import portrait from '@/components/portrait';
     import HeadNav from '@/components/HeadNav';

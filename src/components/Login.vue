@@ -21,6 +21,7 @@
    import portrait from '@/components/portrait';
    import store from '../vuex/store.js';
 
+
    export default {
       name: "Login",
       data(){

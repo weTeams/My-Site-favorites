@@ -16,7 +16,8 @@ function storeLocalStore (state) {
 const store=new Vuex.Store({
      state:{
        username:"罗杰",
-       level:1
+       level:1,
+       newBlogForm:[]
      },
      getters:{//类似于Vue的computed
        computedFull:function(state){
@@ -32,6 +33,10 @@ const store=new Vuex.Store({
 
        reduction(state,n){//传参数,减多少级
          state.level=state.level-n
+       },
+
+       addNewBlogForm(state,data_newBlogForm){//传参数
+         state.newBlogForm=data_newBlogForm
        }
 
      },
@@ -44,6 +49,10 @@ const store=new Vuex.Store({
 
        reductionFun(context,n){
          context.commit("reduction",n)
+       },
+       
+       addNewBlogFormFun(context,data_newBlogForm){
+         context.commit("addNewBlogForm",data_newBlogForm)
        }
      }
 

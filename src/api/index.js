@@ -9,6 +9,31 @@ const instance = axios.create({
 });
 
 export default {
+
+  //博客版本※※※※※※※※※※※※※※※※※※※※※※※※※※※
+
+  //获得所有博客
+  getAllBlog () {
+    return instance.get('/api2/blogs/getAllBlog');
+  },
+
+  //获得所有博客的导览图片  data是id
+  getHead (data) {
+    return instance.get('/api2/blogs/getAllBlog',data);
+  },
+
+  //添加博客
+  addNewBlog ( data ) {
+    return instance.post('/api2/blogs/addNewBlog', data);
+  },
+  
+  //根据id读取博客
+  getBlog ( data ) {
+    return instance.post('/api2/blogs/getBlog', data);
+  },
+
+
+  //※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
   getFeiyanData (){
     return instance.get('Feiyanapi/api?version=epidemic&appid=28936334&appsecret=jQmv77wE');
   },

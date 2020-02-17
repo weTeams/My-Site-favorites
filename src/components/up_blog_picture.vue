@@ -1,39 +1,60 @@
 <template>
+  <div>
   <el-upload
     name="head"
     class="avatar-uploader"
-    action="/api2/users/touxiang"
+    ref="upload"
+    action="/api2/blogs/addNewBlog"
     :show-file-list="false"
+    :data="blogData"
+    :auto-upload="false"
+    :on-change="imgPreview"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload">
     <img v-if="imageUrl" :src="imageUrl" class="avatar">
     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
   </el-upload>
+  <button @click="submit()">上传</button>
+  </div>
 </template>
 
 <script>
     export default {
+      computed:{
+         blogData(){
+          return this.$store.state.newBlogForm
+            }
+      },
+
       data() {
         return {
           imageUrl: ''
         };
       },
       methods: {
+        submit(){
+          this.$refs.upload.submit()
+        },
+
+        imgPreview (file, fileList) {
+            this.imageUrl = URL.createObjectURL(file.raw);
+        },
+
         handleAvatarSuccess(res, file) {
-          
+
           this.imageUrl = URL.createObjectURL(file.raw);
 
         },
         beforeAvatarUpload(file) {
 
           const isJPG = file.type === 'image/jpeg';
-          const isLt2M = file.size / 1024 / 1024 < 2;
+          const isLt2M = file.size / 1024 / 1024 < 4;
 
           if (!isJPG) {
             this.$message.error('上传头像图片只能是 JPG 格式!');
           }
           if (!isLt2M) {
-            this.$message.error('上传头像图片大小不能超过 2MB!');
+            this.$message.error('上传头像图片大小不能超过 4MB!');
           }
           return isJPG && isLt2M;
         }

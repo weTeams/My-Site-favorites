@@ -1,8 +1,29 @@
 <template>
   <div>
-   <div id="main2" style="width: 600px;height:400px;"></div>
-  <div id="main" style="width: 1000px;height: 600px; ">海南省大地图123
-  </div>  </div>
+
+   <el-card >
+     <div id="main" style="width: 1000px;height: 600px; "></div>
+   </el-card>
+    <el-card >
+      <el-col span="12">
+      <div id="main2" style="width: 400px;height:400px;"></div>
+      </el-col>
+      <el-col span="12">
+      <div id="main3" style="width: 400px;height:400px;background-color: #f0f0f0;">
+        <h3>现存确诊：{{currentConfirmedCount}}</h3><br/>
+        <h3>累计确诊：{{confirmedCount}}</h3><br/>
+        <h3>严重病例：{{suspectedCount}}</h3><br/>
+        <h3>治愈：{{curedCount}}</h3><br/>
+        <h3>死亡：{{deadCount}}</h3><br/>
+      </div>
+      </el-col>
+    </el-card>
+
+
+
+
+
+  </div>
 </template>
 
 <script>
@@ -15,6 +36,14 @@
 
     data () {
       return {
+
+        currentConfirmedCount: 0,
+        confirmedCount: 0,
+        suspectedCount: 0,
+        curedCount: 0,
+        deadCount: 0,
+
+
         all_count:0,
         need_data:[],
 
@@ -75,12 +104,14 @@
 
       getFeiyanData(){
           this.instance.getFeiyanData({}).then((response) =>{
-              console.log(response.data.data.area[18]);
-              this.need_data=response.data.data.area[18].cities;
-              //let index = this.index_Of(this.need_data,"临高")
-              //console.log(index)
-              //console.log("**********")
-              //console.log(this.need_data[3].confirmedCount)
+              console.log(response.data.data.area[19]);
+              this.need_data=response.data.data.area[19].cities;
+              this.currentConfirmedCount=response.data.data.area[19].currentConfirmedCount;
+              this.confirmedCount=response.data.data.area[19].confirmedCount;
+              this.suspectedCount=response.data.data.area[19].suspectedCount;
+              this.curedCount=response.data.data.area[19].curedCount;
+              this.deadCount= response.data.data.area[19].deadCount;
+
 
               for (let i in this.series[0].data){
                    let index = this.index_Of(this.need_data,this.series[0].data[i].name)
@@ -163,4 +194,10 @@
 </script>
 
 <style>
+  #main2{
+    display: inline-block;
+  }
+  #main3{
+    display: inline-block;
+  }
 </style>

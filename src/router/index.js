@@ -8,15 +8,14 @@ import portrait from '@/components/portrait'
 import hainan from '@/components/hainan'
 import HeadNav from '@/components/HeadNav'
 
+import bloglist from '@/components/bloglist'
+import touxiang from '@/components/touxiang'
+
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/HeadNav',
-      name: 'HeadNav',
-      component: HeadNav
-    },
     {
       path: '/hello',
       name: 'HelloWorld',
@@ -40,7 +39,7 @@ export default new Router({
     {
       path: '/Touxiang',
       name: 'Touxiang',
-      component: resolve => require(['../pages/touxiang.vue'], resolve),
+      component: touxiang
     },
     {
       path: '/portrait',
@@ -48,9 +47,24 @@ export default new Router({
       component: portrait
     },
     {
-      path: '/hainan',
-      name: 'hainan',
-      component: hainan
+      path: '/Blog',
+      name: 'Blog',
+      component: resolve => require(['../pages/Blog.vue'], resolve),
+    },
+    {
+      path: '/Hainan',
+      name: 'Hainan',
+      component: resolve => require(['../pages/Hainan.vue'], resolve),
+    },
+    {
+      path: '/BlogEditor',
+      name: 'BlogEditor',
+      component: resolve => require(['../pages/BlogEditor.vue'], resolve),
+    },
+    {
+      path: '/DetailedBlog',
+      name: 'DetailedBlog',
+      component: resolve => require(['../pages/DetailedBlog.vue'], resolve),
     }
   ]
 })
