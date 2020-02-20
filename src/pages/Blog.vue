@@ -1,6 +1,6 @@
 <template>
- <el-container>
-      <el-header>
+ <el-container style="background: #e3dbff;">
+      <el-header style="padding: 0px;">
         <my-headnav></my-headnav>
       </el-header>
       <el-container>
@@ -12,9 +12,10 @@
           <el-main>
             <my-bloglist></my-bloglist>
           </el-main>
-          <el-footer>Footer</el-footer>
+
         </el-container>
       </el-container>
+
     </el-container>
 </template>
 

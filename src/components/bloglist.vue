@@ -14,13 +14,16 @@
               <el-button style="float: right;" type="warning" size='mini' icon="el-icon-star-off" circle></el-button>
               <el-button style="float: right;" type="primary" size='mini' icon="el-icon-edit" circle></el-button>
               -->
-              <hr/>
-              {{content.note}}
-              <button @click="jump_detailed(content._id)">查看全文</button>
+              <el-divider>
+              <!--<el-tag style="margin-right: 3px;" size="mini" >{{content.tag}}</el-tag>-->
+              <el-tag style="margin-right: 3px;" size="mini" v-for="tag in content.tag[0].split(',')" >{{tag}}</el-tag>
+              </el-divider>
+              {{content.note}}<br/><br/>
+              <el-button type="success" size="mini" style="display:block;margin:0 auto" @click="jump_detailed(content._id)">阅读全文>></el-button>
               </div></el-col>
-              <el-col :span="6"><div >
+              <el-col :span="6"><div class="sssss">
               <img
-                  style="float:right;width: 133px; height: 100px;margin-bottom:5px;"
+                  style="float:right;width: 200px; height: 150px;"
                   v-bind:src="circleUrl+content._id"
                   :fit="fit">
               </img>
@@ -67,28 +70,8 @@
         pagesize:5,    //    每页的数据
 
         url:'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        contents: [
-          {timestamp:'2018-04-15', title:"今天打了姚静娴的屁股",word:"罗杰今天很生气，想把臭猪揍一顿"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"}
-        ],
-        temp_contents:[
-          {timestamp:'2018-04-15', title:"今天打了姚静娴的屁股",word:"罗杰今天很生气，想把臭猪揍一顿"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"},
-          {timestamp:'2018-04-15', title:"更新 Github 模板",word:"罗杰 提交于 2018/4/2 20:46"}
-        ]
+        contents: [],
+        temp_contents:[]
       };
     },
 
@@ -120,6 +103,7 @@
     },
     mounted() {
       this.getAllBlog()
+
 
     }
   };

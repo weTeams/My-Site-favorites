@@ -8,6 +8,11 @@ const instance = axios.create({
   }
 });
 
+const ins_formdata = axios.create({
+  timeout: 10000,
+  headers: { 'Content-Type': 'multipart/form-data;' },
+});
+
 export default {
 
   //博客版本※※※※※※※※※※※※※※※※※※※※※※※※※※※
@@ -26,7 +31,10 @@ export default {
   addNewBlog ( data ) {
     return instance.post('/api2/blogs/addNewBlog', data);
   },
-  
+  addNewBlog2 ( data ) {
+    return ins_formdata.post('/api2/blogs/addNewBlog', data);
+  },
+
   //根据id读取博客
   getBlog ( data ) {
     return instance.post('/api2/blogs/getBlog', data);

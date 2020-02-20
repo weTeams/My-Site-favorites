@@ -5,8 +5,9 @@
     class="avatar-uploader"
     ref="upload"
     action="/api2/blogs/addNewBlog"
-    :show-file-list="false"
-    :data="blogData"
+    :show-file-list="true"
+    :file-list="filelist"
+    :data="blogData2"
     :auto-upload="false"
     :on-change="imgPreview"
     :on-success="handleAvatarSuccess"
@@ -14,7 +15,7 @@
     <img v-if="imageUrl" :src="imageUrl" class="avatar">
     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
   </el-upload>
-  <button @click="submit()">上传</button>
+  <el-button type="primary"  @click="submit()">确认发表</el-button>
   </div>
 </template>
 
@@ -28,24 +29,38 @@
 
       data() {
         return {
-          imageUrl: ''
+          filelist:[],
+          blogData2:Object(null),
+          imageUrl: '',
+          newBlogForm:[]
         };
       },
       methods: {
         submit(){
+          //console.log(this.$store.state.newBlogForm)
           this.$refs.upload.submit()
+
+
         },
 
         imgPreview (file, fileList) {
+            //console.log(file)
             this.imageUrl = URL.createObjectURL(file.raw);
+            this.blogData2=Object(this.$store.state.newBlogForm)
+            
+
         },
 
         handleAvatarSuccess(res, file) {
-
-          this.imageUrl = URL.createObjectURL(file.raw);
+          alert("发表成功")
+          //将父亲的那个对话框顺带关闭
+          this.$parent.$parent.$parent.all_close();
 
         },
         beforeAvatarUpload(file) {
+          console.log("上传之前的携带数据：")
+          console.log(this.blogData2)
+          console.log(this.filelist)
 
           const isJPG = file.type === 'image/jpeg';
           const isLt2M = file.size / 1024 / 1024 < 4;
@@ -58,6 +73,10 @@
           }
           return isJPG && isLt2M;
         }
+      },
+
+      created() {
+        this.filelist=this.$store.state.newBlogImgs
       }
     }
 </script>

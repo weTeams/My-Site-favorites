@@ -1,5 +1,9 @@
 <template>
   <div>
+   <h1 style="font-size:150%">{{title}}</h1>
+   <el-divider>
+     <i class="el-icon-mobile-phone"></i>
+   </el-divider>
   <mavon-editor
     class="md"
     :value="value"
@@ -20,7 +24,8 @@ export default {
 
   data() {
     return {
-       value:''
+       value:'',
+       title:'',
     };
   },
   methods:{
@@ -29,6 +34,7 @@ export default {
         _id:_id
       }).then((response) =>{
           this.value=response.data.message[0].content
+          this.title=response.data.message[0].title
       }).catch((error) =>{
           console.log(error);
       })
@@ -37,6 +43,16 @@ export default {
 
   created(){
     this.getBlog(this.$route.params._id)
+
+    /*this.$axios({
+           url: '/api2/blogs/Picture_url',
+           method: 'get',
+           data: this.$route.params._id,
+           headers: { 'Content-Type': "application/json;charset=utf-8" },
+       }).then((res) => {
+           this.value=response.data.message[0].content
+           this.title=response.data.message[0].title
+       })*/
   }
 }
 </script>

@@ -1,14 +1,24 @@
 
 <template>
   <el-dialog style="text-align: left;" title="上传文章" :visible.sync="dialogFormVisible">
+        <el-dialog
+          width="30%"
+          title="为博客添加导览图"
+          :visible.sync="child_dialogFormVisible"
+          append-to-body>
+           <my-upblogpicture ref="up_picture" style="text-align: center;"></my-upblogpicture>
+        </el-dialog>
+
+
+
 <el-form ref="form" :model="form" label-width="80px">
   <el-form-item label="文章标题">
     <el-input v-model="form.title"></el-input>
   </el-form-item>
   <el-form-item label="主要类型">
     <el-select v-model="form.maintype" placeholder="请选择活动区域">
-      <el-option label="博客" value="shanghai"></el-option>
-      <el-option label="生活" value="beijing"></el-option>
+      <el-option label="技术" value="技术"></el-option>
+      <el-option label="生活" value="生活"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="时间">
@@ -25,10 +35,10 @@
   </el-form-item>
   <el-form-item label="标签">
     <el-checkbox-group v-model="form.tag">
-      <el-checkbox label="前端" name="type"></el-checkbox>
-      <el-checkbox label="算法/数据结构" name="type"></el-checkbox>
-      <el-checkbox label="后端" name="type"></el-checkbox>
-      <el-checkbox label="其他" name="type"></el-checkbox>
+      <el-checkbox label="前端" name="tag"></el-checkbox>
+      <el-checkbox label="算法/数据结构" name="tag"></el-checkbox>
+      <el-checkbox label="后端" name="tag"></el-checkbox>
+      <el-checkbox label="其他" name="tag"></el-checkbox>
     </el-checkbox-group>
   </el-form-item>
 
@@ -36,11 +46,11 @@
     <el-input type="textarea" v-model="form.note"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="addNewBlogFormFun">立即创建</el-button>
-    <el-button>取消</el-button>
+    <el-button type="primary" @click="addNewBlogFormFun">确认</el-button>
+    <el-button @click="test2()">取消</el-button>
   </el-form-item>
 </el-form>
-<my-upblogpicture></my-upblogpicture>
+
 
 </el-dialog>
 </template>
@@ -61,7 +71,8 @@
 
     data() {
       return {
-        dialogFormVisible:true,
+        dialogFormVisible:false,
+        child_dialogFormVisible:false,
 
         //这个form最后和图片文件一起上传
         form: {
@@ -77,16 +88,28 @@
       }
     },
     methods: {
+      test2(){
+        console.log(this.form.tag)
+      },
+
       onSubmit() {
         //最终确认提交
         console.log('submit!');
 
       },
       addNewBlogFormFun(){
-        console.log(this.form);
+        //console.log(this.form);
         this.$store.dispatch("addNewBlogFormFun",this.form)//将表单数据添加进全局store
-        console.log(this.$store.state)
+
+        //再打开图片上传的控件
+        this.child_dialogFormVisible=true
+
       },
+
+      all_close(){
+        this.child_dialogFormVisible=false
+        this.dialogFormVisible=false
+      }
     }
   }
 </script>

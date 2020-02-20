@@ -3,6 +3,7 @@
      <el-menu
        :default-active="activeIndex2"
        class="el-menu-demo"
+       style="padding: 0px;"
        mode="horizontal"
        @select="handleSelect"
        background-color="#545c64"
@@ -15,7 +16,7 @@
          <el-menu-item index="2-2">工具</el-menu-item>
          <el-menu-item index="2-3">生活</el-menu-item>
        </el-submenu>
-       <el-menu-item index="3" @click="jump_hainan()">海南疫情地图</el-menu-item>
+       <el-menu-item index="3" @click="jump_editor()">写博客</el-menu-item>
        <el-menu-item index="4"><a href="" target="_blank">我的爬虫</a></el-menu-item>
      </el-menu>
    </div>
@@ -38,6 +39,9 @@
          },
          jump_blog(){
            this.$router.push({name:'Blog'});
+         },
+         jump_editor(){
+           this.$router.push({name:'BlogEditor'});
          },
 
         handleSelect(key, keyPath) {

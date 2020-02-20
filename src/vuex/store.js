@@ -17,7 +17,8 @@ const store=new Vuex.Store({
      state:{
        username:"罗杰",
        level:1,
-       newBlogForm:[]
+       newBlogForm:[],
+       newBlogImgs:[]
      },
      getters:{//类似于Vue的computed
        computedFull:function(state){
@@ -37,6 +38,10 @@ const store=new Vuex.Store({
 
        addNewBlogForm(state,data_newBlogForm){//传参数
          state.newBlogForm=data_newBlogForm
+       },
+
+       addNewBlogImgs(state,data_newBlogImg){//传参数
+         state.newBlogImgs=data_newBlogImg
        }
 
      },
@@ -50,10 +55,14 @@ const store=new Vuex.Store({
        reductionFun(context,n){
          context.commit("reduction",n)
        },
+
+       addNewBlogImgsFun(context,data_newBlogImgs){
+         context.commit("addNewBlogImgs",data_newBlogImgs)
+       },
        
        addNewBlogFormFun(context,data_newBlogForm){
          context.commit("addNewBlogForm",data_newBlogForm)
-       }
+       },
      }
 
 })

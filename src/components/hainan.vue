@@ -104,7 +104,7 @@
 
       getFeiyanData(){
           this.instance.getFeiyanData({}).then((response) =>{
-              console.log(response.data.data.area[19]);
+              console.log(response);
               this.need_data=response.data.data.area[19].cities;
               this.currentConfirmedCount=response.data.data.area[19].currentConfirmedCount;
               this.confirmedCount=response.data.data.area[19].confirmedCount;
