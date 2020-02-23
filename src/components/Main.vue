@@ -6,7 +6,7 @@
    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
      <el-menu :default-openeds="['1', '3']">
        <el-submenu index="1">
-         <template slot="title"><i class="el-icon-message"></i>学习</template>
+         <template slot="title"><span>学习</span></template>
          <el-menu-item-group>
            <template slot="title">分组一</template>
            <el-menu-item index="1-1">选项1</el-menu-item>
@@ -21,7 +21,7 @@
          </el-submenu>
        </el-submenu>
        <el-submenu index="2">
-         <template slot="title"><i class="el-icon-menu"></i>生活</template>
+         <template slot="title"><span>生活</span></template>
          <el-menu-item-group>
            <template slot="title">分组一</template>
            <el-menu-item index="2-1">选项1</el-menu-item>
@@ -36,7 +36,7 @@
          </el-submenu>
        </el-submenu>
        <el-submenu index="3">
-         <template slot="title"><i class="el-icon-setting"></i>工具</template>
+         <template slot="title"><span>工具</span></template>
          <el-menu-item-group>
            <template slot="title">分组一</template>
            <el-menu-item index="3-1">选项1</el-menu-item>
@@ -139,14 +139,14 @@
 
      </el-main>
    </el-container>
-   
+
  </el-container>
 
  </div>
 </template>
 <script>
 
-    import '@/outjs/heart.js'
+    //import '@/outjs/heart.js'
     import Axios from 'axios';
     import portrait from '@/components/portrait';
     import HeadNav from '@/components/HeadNav';

@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div
+    v-loading="loading"
+    element-loading-text="正在等待博客里的图片上传哦······"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
       <div class="title-up" style="padding: 10px 10px 10px 10px;background-color: #47484a;">
       <el-row :gutter="20">
         <el-col :span="16">
@@ -14,7 +18,7 @@
         ></el-input></el-col>
         <el-col :span="8">
           <el-button type="info" plain>保存为草稿</el-button>
-          <el-button type="primary" @click="open()">发表博客</el-button>
+          <el-button type="primary" @click="addPictures()">发表博客</el-button>
           </el-col>
       </el-row>
       </div>
@@ -33,7 +37,6 @@
             ></mavon-editor>
 -->
     <my-uploadblog ref="child" :contentFromDad="value"></my-uploadblog>
-     <button @click="test()">查看</button>
 
     </div>
 
@@ -53,6 +56,7 @@ export default {
 
     data() {
         return {
+            loading:false,
             value: '',
             defaultData: "preview",
             title:'',
@@ -78,11 +82,17 @@ export default {
       $imgDel (pos){
         delete this.img_file[pos[0]];
       },
-      test(){
+      addPictures(){
+        if(!this.$store.state.isLogin){
+          this.$message.error('请登录，不然无法使用发表功能');
+          return 0
+        }
+
+        this.loading=true;
 
         // 第一步.将图片上传到服务器.
-          var formdata = new FormData();
-          for(var _img in this.img_file){
+        var formdata = new FormData();
+        for(var _img in this.img_file){
         formdata.append(_img, this.img_file[_img]);
        }
        formdata.append("_img"," this.img_file[_img]");
@@ -107,12 +117,22 @@ export default {
                     this.$refs.md.$img2Url(pos, url);
                 }
 
-                console.log("图片上传成功啦")
+                this.loading=false;
+                this.open();
             })
        //*******************
 
 
       }
+   },
+
+   mounted() {
+     if(!this.$store.state.isLogin){
+       this.$message({
+                 message: '您尚未登录，不可以使用发表功能',
+                 type: 'warning'
+               });
+     }
    }
 };
 </script>

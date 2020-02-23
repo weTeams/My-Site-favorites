@@ -3,10 +3,11 @@
 
             <el-timeline style="padding-left:0 ;">
               <el-timeline-item placement="top" v-for="(content,index) in contents"
+
               :key="index"
               :timestamp="content.date">
               <el-card>
-              <el-row gutter="1">
+              <el-row gutter=1>
               <el-col :span="18"><div >
               <h3>{{content.title}}</h3>
               <!--

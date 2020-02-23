@@ -15,7 +15,9 @@ function storeLocalStore (state) {
 //创建Vuex实例
 const store=new Vuex.Store({
      state:{
-       username:"罗杰",
+       username:"",
+       token:'',
+       isLogin:Boolean(false),
        level:1,
        newBlogForm:[],
        newBlogImgs:[]
@@ -27,6 +29,10 @@ const store=new Vuex.Store({
      },
      /*************************************************************/
      mutations:{
+       login(state,username){
+         state.username=username
+         state.isLogin=true
+       },
 
        add(state){//上面定义的state
          state.level=state.level+1
@@ -59,9 +65,14 @@ const store=new Vuex.Store({
        addNewBlogImgsFun(context,data_newBlogImgs){
          context.commit("addNewBlogImgs",data_newBlogImgs)
        },
-       
+
        addNewBlogFormFun(context,data_newBlogForm){
          context.commit("addNewBlogForm",data_newBlogForm)
+       },
+
+       //上传登录状态
+       loginFun(context,username){
+         context.commit("login",username)
        },
      }
 

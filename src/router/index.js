@@ -27,11 +27,6 @@ export default new Router({
 		  component: HelloWorld2
 		},
     {
-      path: '/',
-      name: 'Login',
-      component: Login
-    },
-    {
       path: '/Main',
       name: 'Main',
       component: Main
@@ -47,9 +42,14 @@ export default new Router({
       component: portrait
     },
     {
-      path: '/Blog',
+      path: '/',
       name: 'Blog',
       component: resolve => require(['../pages/Blog.vue'], resolve),
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login,
     },
     {
       path: '/Hainan',

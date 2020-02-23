@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <el-footer style="background-color: #222222;">Footer</el-footer>
+    <!--<el-footer style="background-color: #222222;">Footer</el-footer>-->
   </div>
 </template>
 

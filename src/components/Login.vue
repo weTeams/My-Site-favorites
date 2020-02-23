@@ -3,16 +3,15 @@
   <div class="login">
     <my-portrait></my-portrait>
       <div>
-        <h1>{{this.$store.state.username}}的等级：LV.{{this.$store.state.level}}</h1>
-        <el-input placeholder="请输入用户名" v-model="name" clearable class="input_style"></el-input>
+        <h1>{{this.$store.state.username}}的等级：LV.{{this.$store.state.isLogin}}</h1>
+        <el-input style="width: 300px" size="medium" placeholder="请输入用户名" v-model="name" clearable class="input_style"></el-input>
       </div>
       <div>
-        <el-input placeholder="请输入密码" v-model="password" show-password class="input_style"></el-input>
+        <el-input style="width: 300px" size="medium" placeholder="请输入密码" v-model="password" show-password class="input_style"></el-input>
       </div>
       <div>
         <el-button type="primary" @click="login2" class="login_style">登录</el-button>
       </div>
-      <div>{{name}} {{password}}</div>
   </div>
 </template>
 
@@ -55,7 +54,9 @@
             }).then((response) =>{          //这里使用了ES6的语法
                 console.log(response);       //请求成功返回的数据
                 if(response.data.status==1){
-                this.$router.push({name:'Main',params:{username:this.name,password:this.password}});
+                //this.$router.push({name:'Main',params:{username:this.name,password:this.password}});
+                this.$store.dispatch("loginFun",this.name)//将表单数据添加进全局store
+                this.$router.push({name:'Blog'})
                 }
             }).catch((error) =>{
                 console.log(error);       //请求失败返回的数据
