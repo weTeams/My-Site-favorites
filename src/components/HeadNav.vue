@@ -10,14 +10,10 @@
        text-color="#fff"
        active-text-color="#ffd04b">
        <el-menu-item index="1" @click="jump_blog()" >我的博客</el-menu-item>
-       <el-submenu index="2">
-         <template slot="title">网址收藏夹</template>
-         <el-menu-item index="2-1"  @click="jump_collect()">技术</el-menu-item>
-         <el-menu-item index="2-2">工具</el-menu-item>
-         <el-menu-item index="2-3">生活</el-menu-item>
-       </el-submenu>
+       <el-menu-item index="2" @click="jump_collect()">网络收藏夹</el-menu-item>
        <el-menu-item index="3" @click="jump_editor()">写博客</el-menu-item>
-       <el-menu-item index="4" @click="jump_login()">登录</a></el-menu-item>
+       <el-menu-item index="4" @click="jump_login()">登录</el-menu-item>
+       <el-menu-item index="5" @click="jump_outbreak()">疫情天眼</el-menu-item>
      </el-menu>
    </div>
 </template>
@@ -45,6 +41,9 @@
          },
          jump_login(){
            this.$router.push({name:'Login'});
+         },
+         jump_outbreak(){
+           window.location.href = "http://www.luojiework.cn:8017/#/Home"
          },
 
         handleSelect(key, keyPath) {

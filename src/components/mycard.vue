@@ -5,11 +5,11 @@
       <my-portrait></my-portrait>
         <br/><br/>
         <el-button style="margin:10px 5px;" >我的简历</el-button>
-        <el-button style="margin:10px 5px;"type="info"  >Github</el-button>
+        <el-button style="margin:10px 5px;"type="info" @click="jump_Github()">Github</el-button>
         <el-button style="margin:10px 5px;"type="primary"  >知乎</el-button>
         <el-button style="margin:10px 5px;"type="success"  >LeetCode</el-button>
 
-        <el-button style="margin:10px 5px;"type="danger"  >CSDN博客</el-button>
+        <el-button style="margin:10px 5px;"type="danger"  @click="jump_csdn()">CSDN博客</el-button>
         <el-button style="margin:10px 5px;"type="warning"  >关于我</el-button>
      </div>
    </el-card>
@@ -28,6 +28,17 @@
       return {
 
       };
+
+    },
+
+    methods:{
+      jump_csdn(){
+        window.location.href = "https://me.csdn.net/qq_41841048"
+      },
+      jump_Github(){
+        window.location.href = "https://github.com/luojiegithuber"
+      },
+
     }
   };
 </script>

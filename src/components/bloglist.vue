@@ -23,12 +23,17 @@
               <el-button type="success" size="mini" style="display:block;margin:0 auto" @click="jump_detailed(content._id)">阅读全文>></el-button>
               </div></el-col>
               <el-col :span="6"><div class="sssss">
-              <img
+              <!--<img
                   style="float:right;width: 200px; height: 150px;"
                   v-bind:src="circleUrl+content._id"
                   :fit="fit">
-              </img>
-              <img/>
+              </img>-->
+    <el-image
+      style="float:right;width: 200px; height: 150px;"
+      :src="circleUrl+content._id"
+      :fit="fit"
+      lazy></el-image>
+
               </div></el-col>
               </el-row>
 

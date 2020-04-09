@@ -37,6 +37,10 @@
       return {
 
       };
+    },
+
+    mounted(){
+
     }
   };
 </script>
