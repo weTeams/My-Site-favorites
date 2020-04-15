@@ -1,6 +1,6 @@
 <template>
 
-   <el-card  style="margin-left: 20px;margin-top: 20px;">
+   <el-card  style="margin-left: 20px;margin-top: 20px;background-color: #b3e8e4;border: 0;">
      <div class="test">
       <my-portrait></my-portrait>
         <br/><br/>

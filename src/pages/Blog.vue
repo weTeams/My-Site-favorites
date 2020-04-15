@@ -1,13 +1,15 @@
 <template>
- <el-container style="background: #e3dbff;">
+ <el-container style="background: #b3e8e4;">
       <el-header style="padding: 0px;">
         <my-headnav></my-headnav>
       </el-header>
       <el-container>
-        <el-aside width="350px">
+        <el-aside width="350px" >
           <my-card></my-card>
 
+          <my-specter></my-specter>
         </el-aside>
+
         <el-container>
           <el-main>
             <my-bloglist></my-bloglist>
@@ -24,13 +26,15 @@
     import HeadNav from '@/components/HeadNav';
     import bloglist from '@/components/bloglist';
     import mycard from '@/components/mycard'
+    import specter from '@/components/Specter'
   export default {
 
     components:{
       'my-portrait':portrait,
       'my-headnav':HeadNav,
       'my-bloglist':bloglist,
-      'my-card':mycard
+      'my-card':mycard,
+      'my-specter':specter,
     },
 
     data() {

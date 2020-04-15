@@ -12,40 +12,27 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-submenu index="1">
-        <template slot="title">
 
-          <span>学习</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">学习</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">
+      <el-menu-item index="1" @click="getStudy()">
+        <div slot="title">学习</div>
+
+      </el-menu-item>
+      <el-menu-item index="2" @click="getTool()">
         <div slot="title">工具</div>
 
       </el-menu-item>
-      <el-menu-item index="3" >
+      <el-menu-item index="3"  @click="getLife()">
 
       <span slot="title">生活</span>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="4"  @click="getWeb()">
 
         <span slot="title">前端</span>
       </el-menu-item>
-      <el-menu-item index="5">
+      <el-menu-item index="5"  @click="getOther()">
 
 
-        <span slot="title">算法</span>
+        <span slot="title">其他</span>
 
       </el-menu-item>
       <el-menu-item index="6">
@@ -67,6 +54,15 @@
          <el-form-item label="网址URL" :label-width="formLabelWidth">
            <el-input v-model="form.url" autocomplete="off"></el-input>
          </el-form-item>
+
+         <el-form-item label="类别" :label-width="formLabelWidth">
+           <el-radio v-model="radio" label=0>学习</el-radio>
+           <el-radio v-model="radio" label=1>工具</el-radio>
+           <el-radio v-model="radio" label=2>生活</el-radio>
+           <el-radio v-model="radio" label=3>前端</el-radio>
+           <el-radio v-model="radio" label=4>其他</el-radio>
+         </el-form-item>
+
        </el-form>
        <div slot="footer" class="dialog-footer">
          <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -106,10 +102,21 @@
 
      <el-main>
        <el-table :data="tables.slice((currentPage-1)*pagesize,currentPage*pagesize)"  stripe=true >
-         <el-table-column prop="date" label="日期" width="140">
+         <el-table-column prop="date" label="日期" width="100">
 
          </el-table-column>
+         <el-table-column  label="类别" width="80">
+        <template slot-scope="scope">
 
+                           <el-tag v-if="scope.row.__v===0" >学习</el-tag>
+                           <el-tag  v-else-if="scope.row.__v===1" type="success">工具</el-tag>
+                           <el-tag  v-else-if="scope.row.__v===2" type="info">生活</el-tag>
+                           <el-tag  v-else-if="scope.row.__v===3" type="warning">前端</el-tag>
+                           <el-tag  v-else-if="scope.row.__v===4" type="danger">其他</el-tag>
+
+
+        </template>
+         </el-table-column>
 
  <el-table-column label="url"
         min-width="250">
@@ -175,12 +182,18 @@
           dialogFormVisible: false,
           dialogVisible: false,
 
+          tag_flag:false,
+          tag_name:'',
+
+          radio:'',
+
           temp_index:'',
           temp_site:'',
 
           form: {
                     url: '',
                     delivery: false,
+                    __v:'',
                   },
           formLabelWidth: '80px',
           search: '',
@@ -194,7 +207,19 @@
       computed: {
               // 模糊搜索
               tables () {
+                
                 const search = this.search
+                this.currentPage=1
+                //如果是根据标签搜索的话
+                if(this.tag_flag){
+
+                    return this.urlData.filter(data => {
+                        return data.__v==this.tag_name
+                    })
+
+                }
+
+
                 if (search) {
                   // filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
                   // 注意： filter() 不会对空数组进行检测。
@@ -221,13 +246,71 @@
 
 
       methods: {
+
+        /*************五大类别**************/
+
+        getStudy(){
+          this.tag_flag=true
+          this.tag_name=0
+
+          this.$forceUpdate()
+
+          this.tag_flg=false
+        },
+        getTool(){
+          this.tag_flag=true
+          this.tag_name=1
+
+          this.$forceUpdate()
+
+          this.tag_flg=false
+        },
+        getLife(){
+          this.tag_flag=true
+          this.tag_name=2
+
+          this.$forceUpdate()
+
+          this.tag_flg=false
+        },
+        getWeb(){
+          this.tag_flag=true
+          this.tag_name=3
+
+          this.$forceUpdate()
+
+          this.tag_flg=false
+        },
+        getOther(){
+          this.tag_flag=true
+          this.tag_name=4
+
+          this.$forceUpdate()
+
+          this.tag_flg=false
+        },
+
+
+
+
+
+
+
+
+        /******************************/
+
+
        change (e) {
              this.$forceUpdate()
            },
       addNew() {
+
+        this.form.__v=this.radio
+        console.log("类别是"+this.form.__v)
         this.dialogFormVisible = false;
         this.instance.addNewUrl({    //这里是发送给后台的数据
-              url:this.form.url  //发送网址
+              url:this.form.url  ,//发送网址
+              __v: this.form.__v,//类别
         }).then((response) =>{          //这里使用了ES6的语法
             console.log(response);       //请求成功返回的数据
             this.getAll();
