@@ -43,6 +43,12 @@
       };
     },
 
+    created() {
+      if (localStorage.getItem("userMsg")) {
+
+         this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(localStorage.getItem("userMsg"))))
+      }
+    },
     mounted(){
 
     }

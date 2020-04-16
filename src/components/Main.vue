@@ -13,6 +13,11 @@
       text-color="#fff"
       active-text-color="#ffd04b">
 
+      <el-menu-item index="0" @click="getAllSite()">
+        <div slot="title">全部</div>
+
+      </el-menu-item>
+
       <el-menu-item index="1" @click="getStudy()">
         <div slot="title">学习</div>
 
@@ -30,7 +35,6 @@
         <span slot="title">前端</span>
       </el-menu-item>
       <el-menu-item index="5"  @click="getOther()">
-
 
         <span slot="title">其他</span>
 
@@ -83,18 +87,12 @@
      </el-dialog>
 
      <el-header style="text-align: right; font-size: 12px">
-       <el-dropdown>
-         <i class="el-icon-setting" style="margin-right: 15px"></i>
-         <el-dropdown-menu slot="dropdown">
-           <el-dropdown-item @click.native="getAll">查看</el-dropdown-item>
-           <el-dropdown-item @click.native= "dialogFormVisible = true">新增</el-dropdown-item>
-           <el-dropdown-item>删除</el-dropdown-item>
-         </el-dropdown-menu>
-       </el-dropdown>
+
         <el-input v-model="search" style="display: inline-block;width: 600px"
                placeholder="请输入搜索内容" @input="change($event)">
              </el-input>
         <el-button icon="el-icon-search" circle></el-button>
+        <el-button icon="el-icon-plus" circle @click= "OpenDialogFormVisible()" type="primary"></el-button>
 
 
        <span>{{username}}</span>
@@ -182,6 +180,8 @@
           dialogFormVisible: false,
           dialogVisible: false,
 
+          getAllSiteVar:true,
+
           tag_flag:false,
           tag_name:'',
 
@@ -207,18 +207,19 @@
       computed: {
               // 模糊搜索
               tables () {
-                
+
+                let boring=this.getAllSiteVar//为了让【全部】触发
                 const search = this.search
                 this.currentPage=1
                 //如果是根据标签搜索的话
                 if(this.tag_flag){
-
+                    this.tag_flag=false
                     return this.urlData.filter(data => {
                         return data.__v==this.tag_name
                     })
 
-                }
 
+                }
 
                 if (search) {
                   // filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
@@ -247,47 +248,57 @@
 
       methods: {
 
-        /*************五大类别**************/
+        //判断增加的操作权限
+        OpenDialogFormVisible(){
+           if(!this.$store.state.isLogin){
+             this.$message.error('请登录，不然无法使用增加功能');
+             return 0
+           }else{
+             this.dialogFormVisible=true
+           }
 
+        },
+
+
+        /*************五大类别**************/
+        getAllSite(){
+           this.getAllSiteVar=!(this.getAllSiteVar)
+           //this.$forceUpdate()
+        },
         getStudy(){
           this.tag_flag=true
           this.tag_name=0
 
-          this.$forceUpdate()
+          //this.$forceUpdate()
 
-          this.tag_flg=false
         },
         getTool(){
           this.tag_flag=true
           this.tag_name=1
 
-          this.$forceUpdate()
+          //this.$forceUpdate()
 
-          this.tag_flg=false
         },
         getLife(){
           this.tag_flag=true
           this.tag_name=2
 
-          this.$forceUpdate()
+          //this.$forceUpdate()
 
-          this.tag_flg=false
         },
         getWeb(){
           this.tag_flag=true
           this.tag_name=3
 
-          this.$forceUpdate()
+          //this.$forceUpdate()
 
-          this.tag_flg=false
         },
         getOther(){
           this.tag_flag=true
           this.tag_name=4
 
-          this.$forceUpdate()
+          //this.$forceUpdate()
 
-          this.tag_flg=false
         },
 
 
@@ -301,7 +312,7 @@
 
 
        change (e) {
-             this.$forceUpdate()
+             //this.$forceUpdate()
            },
       addNew() {
 
