@@ -100,9 +100,7 @@
 
      <el-main>
        <el-table :data="tables.slice((currentPage-1)*pagesize,currentPage*pagesize)"  stripe=true >
-         <el-table-column prop="date" label="日期" width="100">
 
-         </el-table-column>
          <el-table-column  label="类别" width="80">
         <template slot-scope="scope">
 
@@ -262,10 +260,12 @@
 
         /*************五大类别**************/
         getAllSite(){
+
            this.getAllSiteVar=!(this.getAllSiteVar)
            //this.$forceUpdate()
         },
         getStudy(){
+
           this.tag_flag=true
           this.tag_name=0
 
@@ -273,6 +273,7 @@
 
         },
         getTool(){
+
           this.tag_flag=true
           this.tag_name=1
 
@@ -280,6 +281,7 @@
 
         },
         getLife(){
+
           this.tag_flag=true
           this.tag_name=2
 
@@ -287,6 +289,10 @@
 
         },
         getWeb(){
+          if(!this.$store.state.isLogin){
+            this.$message.error('请登录，不然无法查看');
+            return 0
+          }
           this.tag_flag=true
           this.tag_name=3
 
@@ -294,6 +300,7 @@
 
         },
         getOther(){
+
           this.tag_flag=true
           this.tag_name=4
 
