@@ -1,8 +1,5 @@
 <template>
  <el-container>
-      <el-header style="padding: 0px;">
-        <my-headnav></my-headnav>
-      </el-header>
       <el-container>
         <el-aside width="350px">
           <my-card></my-card>

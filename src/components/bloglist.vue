@@ -145,7 +145,7 @@
       padding-top: 10px;
       border-radius: 100px;
       color: #fff;
-      background: #5555ff;
+      background: #759aff;
   }
 
   .s-round-date span {

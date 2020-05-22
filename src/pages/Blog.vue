@@ -6,6 +6,10 @@
         <el-aside width="350px" >
           <my-card></my-card>
 
+          <my-love></my-love>
+          
+          <br/><br/>
+
           <my-specter></my-specter>
         </el-aside>
 
@@ -26,6 +30,7 @@
     import bloglist from '@/components/bloglist';
     import mycard from '@/components/mycard'
     import specter from '@/components/Specter'
+    import LoveCount from '@/components/love-count'
   export default {
 
     components:{
@@ -34,6 +39,7 @@
       'my-bloglist':bloglist,
       'my-card':mycard,
       'my-specter':specter,
+      'my-love':LoveCount,
     },
 
     data() {
