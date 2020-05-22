@@ -1,12 +1,16 @@
 <template>
    <div class="contain">
+    <div id="headImg">
+      Hello World<br/><br/>
+      用代码书写我最爱的世界
+
      <el-menu
        :default-active="activeIndex2"
        class="el-menu-demo"
-       style="padding: 0px;"
+       style="padding: 0px;position: absolute;bottom: 0px;"
        mode="horizontal"
        @select="handleSelect"
-       background-color="#545c64"
+       background-color="rgba(44,62,80,.1)"
        text-color="#fff"
        active-text-color="#ffd04b">
        <el-menu-item index="1" @click="jump_blog()" >我的博客</el-menu-item>
@@ -15,6 +19,7 @@
        <el-menu-item index="4" @click="jump_login()">登录</el-menu-item>
        <el-menu-item index="5" @click="jump_outbreak()">疫情天眼</el-menu-item>
      </el-menu>
+         </div>
    </div>
 </template>
 

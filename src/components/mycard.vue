@@ -1,7 +1,8 @@
 <template>
 
-   <el-card  style="margin-left: 20px;margin-top: 20px;background-color: #b3e8e4;border: 0;">
+   <el-card  style="margin-left: 20px;margin-top: 20px;border: 0;">
      <div class="test">
+       <br/>
       <my-portrait></my-portrait>
         <br/><br/>
         <el-button style="margin:10px 5px;" >我的简历</el-button>
@@ -50,10 +51,10 @@
     width:100%;
     height:430px;
 
+
     background-image:url(../assets/卡片背景.jpg);
     background-size: cover; -moz-background-size: cover;
 
-    border-radius:10px
   }
 
 </style>

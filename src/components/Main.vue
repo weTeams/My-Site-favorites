@@ -1,6 +1,7 @@
 <template>
  <div class="main">
-   <my-headnav></my-headnav>
+
+
 
  <el-container style="height: 75%; border: 1px solid #eee">
    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">

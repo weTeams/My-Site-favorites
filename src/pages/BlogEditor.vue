@@ -4,6 +4,7 @@
     element-loading-text="正在等待博客里的图片上传哦······"
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)">
+    
       <div class="title-up" style="padding: 10px 10px 10px 10px;background-color: #47484a;">
       <el-row :gutter="20">
         <el-col :span="16">
@@ -131,7 +132,7 @@ export default {
        this.$message({
                  message: '您尚未登录，不可以使用发表功能',
                  type: 'warning'
-               });
+        });
      }
    }
 };

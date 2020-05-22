@@ -5,8 +5,9 @@
               <el-timeline-item placement="top" v-for="(content,index) in contents"
 
               :key="index"
-              :timestamp="content.date">
+>
               <el-card>
+              <span class="s-round-date"><span class="month">{{get_month(content.date)+'月'}}</span> <span class="day">{{get_day(content.date)}}</span></span>
               <el-row gutter=1>
               <el-col :span="18"><div >
               <h3>{{content.title}}</h3>
@@ -82,6 +83,16 @@
     },
 
     methods:{
+
+      //对返回的时间处理
+      get_month(date){
+        return date.split('-')[1]
+      },
+      get_day(date){
+        return date.split('-')[2]
+      },
+
+
       jump_detailed(_id){
         console.log(_id)
         this.$router.push({name:'DetailedBlog',params:{_id:_id}})
@@ -124,5 +135,26 @@
   i{
     float: right;
   }
+
+  .s-round-date {
+      position: absolute;
+      top: -5px;
+      left: -10px;
+      height: 60px;
+      width: 70px;
+      padding-top: 10px;
+      border-radius: 100px;
+      color: #fff;
+      background: #5555ff;
+  }
+
+  .s-round-date span {
+      text-align: center;
+      display: block;
+  }
+.s-round-date .day {
+    font-size: 30px;
+    font-weight: 700;
+}
 
 </style>

@@ -1,9 +1,8 @@
 <template>
  <el-container style="background: #b3e8e4;">
-      <el-header style="padding: 0px;">
-        <my-headnav></my-headnav>
-      </el-header>
-      <el-container>
+
+
+      <el-container style="overflow: auto;">
         <el-aside width="350px" >
           <my-card></my-card>
 
@@ -42,6 +41,7 @@
 
       };
     },
+
 
     created() {
       if (localStorage.getItem("userMsg")) {
